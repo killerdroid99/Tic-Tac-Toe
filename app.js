@@ -59,6 +59,8 @@ const GameFlow = (() => {
 						document.querySelector(
 							".p2text"
 						).innerText = `Player 2 plays ${playerTwo.myMarker}`;
+						element.style.cssText =
+							"border-radius: 20px;background-color: #dc1457; box-shadow: inset 0px 0px 10px black";
 						board[i] = playerOne.myMarker;
 						rules(playerOne.myMarker);
 						turn = false;
@@ -68,6 +70,8 @@ const GameFlow = (() => {
 							".p1text"
 						).innerText = `Player 1 plays ${playerOne.myMarker}`;
 						document.querySelector(".p2text").innerText = "";
+						element.style.cssText =
+							"border-radius: 20px;background-color: skyblue; box-shadow: inset 0px 0px 10px black";
 						board[i] = playerTwo.myMarker;
 						rules(playerTwo.myMarker);
 						turn = true;
@@ -127,6 +131,7 @@ const GameFlow = (() => {
 				? (winEvent.innerText = "Player 1 wins")
 				: (winEvent.innerText = "Player 2 wins");
 			document.querySelector(".selection-text").innerText = "";
+			playAgain();
 		} else if (!board.includes("")) {
 			winEvent.style.visibility = "visible";
 			winEvent.innerText = "It's a draw!";

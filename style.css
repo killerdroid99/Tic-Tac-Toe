@@ -22,6 +22,108 @@ header {
 	/* animation: glitch 600ms infinite; */
 }
 
+.GameBoard {
+	display: grid;
+	grid-template-columns: repeat(3, clamp(25px, 200px, 300px));
+	grid-template-rows: repeat(3, clamp(25px, 200px, 300px));
+	background-color: #cfc;
+	grid-gap: 10px;
+	padding: 10px;
+}
+
+.cell {
+	background-color: rgba(253, 249, 232);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10em;
+	cursor: pointer;
+	font-family: "Poppins";
+	text-shadow: 5px 7px 0 indigo;
+	border-radius: 10px;
+	transition: 0.3s;
+}
+
+.overlay {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(204, 204, 204, 0.5);
+	height: 100vh;
+	width: 100vw;
+	text-align: center;
+}
+
+form {
+	font-size: clamp(1rem, 10vh, 2rem);
+	text-shadow: 0.025em 0.05em 0 red, -0.025em 0.05em 0 green,
+		0.05em -0.025em 0 blue;
+	/* animation: glitch 600ms infinite; */
+}
+
+form input {
+	width: clamp(25px, 60px, 100px);
+	height: clamp(25px, 60px, 100px);
+	font-size: inherit;
+	cursor: pointer;
+	margin-inline: 1em;
+	border: none;
+	border-radius: 5px;
+	transition: 0.2s;
+}
+
+form input:hover {
+	box-shadow: 0px 0px 5px hotpink;
+	border-radius: 15px;
+}
+
+form input:focus-visible {
+	box-shadow: 0px 0px 5px hotpink;
+	border-radius: 15px;
+	outline: none;
+}
+
+form input:active {
+	transform: scale(0.95);
+}
+
+.selection-text {
+	display: inline-flex;
+	margin: 1em;
+}
+
+.winEvent {
+	font-size: clamp(4rem, 10vw, 5rem);
+	text-shadow: 0.025em 0.05em 0 red, -0.025em 0.05em 0 green,
+		0.05em -0.025em 0 blue;
+	visibility: hidden;
+	display: flex;
+	flex-direction: column;
+	animation: glitch 600ms infinite;
+}
+
+.playAgain {
+	width: 5em;
+	height: 2em;
+	font-size: 2rem;
+	cursor: pointer;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 5px 5px 0px black;
+	transition: 0.2s;
+}
+
+.playAgain:hover {
+	background-color: #cfc;
+	color: rgb(255, 0, 221);
+	-webkit-text-stroke: 0.3px black;
+}
+
+.playAgain:active {
+	transform: scale(0.95);
+}
+
 @keyframes glitch {
 	0% {
 		text-shadow: 0.05em 0.07em 0 red, -0.025em 0.07em 0 green,
@@ -47,93 +149,4 @@ header {
 		text-shadow: 0.05em 0.07em 0 red, -0.025em 0.07em 0 green,
 			0.07em -0.025em 0 blue;
 	}
-}
-
-.GameBoard {
-	display: grid;
-	grid-template-columns: repeat(3, clamp(25px, 200px, 300px));
-	grid-template-rows: repeat(3, clamp(25px, 200px, 300px));
-	background-color: #cfc;
-	grid-gap: 10px;
-	padding: 10px;
-}
-
-.cell {
-	background-color: rgba(253, 249, 232);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 10em;
-	cursor: pointer;
-	font-family: "Poppins";
-	text-shadow: 5px 7px 0 indigo;
-}
-
-.overlay {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: rgba(204, 204, 204, 0.5);
-	height: 100vh;
-	width: 100vw;
-	text-align: center;
-}
-
-form {
-	font-size: clamp(1rem, 10vh, 2rem);
-	text-shadow: 0.025em 0.05em 0 red, -0.025em 0.05em 0 green,
-		0.05em -0.025em 0 blue;
-}
-
-form input {
-	width: clamp(25px, 60px, 100px);
-	height: clamp(25px, 60px, 100px);
-	font-size: inherit;
-	cursor: pointer;
-	margin-inline: 1em;
-	border: none;
-}
-
-form input:hover {
-	box-shadow: 0px 0px 5px hotpink;
-}
-
-form input:active {
-	transform: scale(0.95);
-}
-
-.selection-text {
-	display: inline-flex;
-	margin: 1em;
-}
-
-.winEvent {
-	font-size: clamp(4rem, 10vw, 5rem);
-	text-shadow: 0.025em 0.05em 0 red, -0.025em 0.05em 0 green,
-		0.05em -0.025em 0 blue;
-	visibility: hidden;
-	display: flex;
-	flex-direction: column;
-}
-
-.playAgain {
-	width: 5em;
-	height: 2em;
-	font-size: 2rem;
-	cursor: pointer;
-	border: none;
-	border-radius: 10px;
-	box-shadow: 5px 5px 0px black;
-	transition: 0.2s;
-}
-
-.playAgain:hover {
-	background-color: #cfc;
-	color: chartreuse;
-	-webkit-text-stroke: 0.3px black;
-}
-
-.playAgain:active {
-	transform: scale(0.95);
 }
