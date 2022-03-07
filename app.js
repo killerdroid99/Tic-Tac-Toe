@@ -142,8 +142,7 @@ const GameFlow = (() => {
 		document.querySelector(".winEvent").appendChild(playAgain);
 		playAgain.addEventListener("click", () => {
 			document.querySelector(".winEvent").style.visibility = "hidden";
-			console.log(board);
-			document.querySelector(".overlay").style.visibility = "visible";
+			location.reload();
 		});
 	};
 
