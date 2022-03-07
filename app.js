@@ -1,7 +1,7 @@
 const GameBoard = (() => {
 	"use strict";
 	// const gameBoard = ["✖️", "⭕", "✖️", "⭕", "✖️", "⭕", "✖️", "⭕", "✖️"];
-	const gameBoard = ["", "", "", "", "", "", "", "", ""];
+	let gameBoard = ["", "", "", "", "", "", "", "", ""];
 
 	const connectToDOM = (array) => {
 		array.forEach((element, i) => {
@@ -32,7 +32,7 @@ const GameFlow = (() => {
 		xMarker.addEventListener("click", () => {
 			playerOne.myMarker = xMarker.value;
 			playerTwo.myMarker = oMarker.value;
-			document.getElementById("overlay").style.display = "none";
+			document.querySelector(".overlay").style.visibility = "hidden";
 			document.querySelector(
 				".p1text"
 			).innerText = `Player 1 plays ${playerOne.myMarker}`;
@@ -40,7 +40,7 @@ const GameFlow = (() => {
 		oMarker.addEventListener("click", () => {
 			playerOne.myMarker = oMarker.value;
 			playerTwo.myMarker = xMarker.value;
-			document.getElementById("overlay").style.display = "none";
+			document.querySelector(".overlay").style.visibility = "hidden";
 			document.querySelector(
 				".p1text"
 			).innerText = `Player 1 plays ${playerOne.myMarker}`;
@@ -60,7 +60,7 @@ const GameFlow = (() => {
 							".p2text"
 						).innerText = `Player 2 plays ${playerTwo.myMarker}`;
 						board[i] = playerOne.myMarker;
-						rules();
+						rules(playerOne.myMarker);
 						turn = false;
 					} else {
 						element.innerText = playerTwo.myMarker;
@@ -69,7 +69,7 @@ const GameFlow = (() => {
 						).innerText = `Player 1 plays ${playerOne.myMarker}`;
 						document.querySelector(".p2text").innerText = "";
 						board[i] = playerTwo.myMarker;
-						rules();
+						rules(playerTwo.myMarker);
 						turn = true;
 					}
 				}
@@ -78,29 +78,73 @@ const GameFlow = (() => {
 		});
 	};
 
-	const rules = () => {
+	const rules = (playerMarker) => {
+		const winEvent = document.querySelector(".winEvent");
 		if (
-			board[0] === playerOne.myMarker ||
-			(board[0] === playerTwo.myMarker && board[1] === playerOne.myMarker) ||
-			(board[1] === playerTwo.myMarker && board[2] === playerOne.myMarker) ||
-			board[2] === playerTwo.myMarker
+			(board[0] === playerMarker &&
+				board[1] === playerMarker &&
+				board[2] === playerMarker) ||
+			(board[3] === playerMarker &&
+				board[4] === playerMarker &&
+				board[5] === playerMarker) ||
+			(board[6] === playerMarker &&
+				board[7] === playerMarker &&
+				board[8] === playerMarker)
 		) {
-			console.log("test win");
+			winEvent.style.visibility = "visible";
+			playerMarker === playerOne.myMarker
+				? (winEvent.innerText = "Player 1 wins")
+				: (winEvent.innerText = "Player 2 wins");
+			document.querySelector(".selection-text").innerText = "";
+			playAgain();
 		} else if (
-			board[3] === playerOne.myMarker ||
-			(board[3] === playerTwo.myMarker && board[4] === playerOne.myMarker) ||
-			(board[4] === playerTwo.myMarker && board[5] === playerOne.myMarker) ||
-			board[5] === playerTwo.myMarker
+			(board[0] === playerMarker &&
+				board[3] === playerMarker &&
+				board[6] === playerMarker) ||
+			(board[1] === playerMarker &&
+				board[4] === playerMarker &&
+				board[7] === playerMarker) ||
+			(board[2] === playerMarker &&
+				board[5] === playerMarker &&
+				board[8] === playerMarker)
 		) {
-			console.log("test win");
+			winEvent.style.visibility = "visible";
+			playerMarker === playerOne.myMarker
+				? (winEvent.innerText = "Player 1 wins")
+				: (winEvent.innerText = "Player 2 wins");
+			document.querySelector(".selection-text").innerText = "";
+			playAgain();
 		} else if (
-			board[6] === playerOne.myMarker ||
-			(board[6] === playerTwo.myMarker && board[7] === playerOne.myMarker) ||
-			(board[7] === playerTwo.myMarker && board[8] === playerOne.myMarker) ||
-			board[8] === playerTwo.myMarker
+			(board[0] === playerMarker &&
+				board[4] === playerMarker &&
+				board[8] === playerMarker) ||
+			(board[2] === playerMarker &&
+				board[4] === playerMarker &&
+				board[6] === playerMarker)
 		) {
-			console.log("test win");
+			winEvent.style.visibility = "visible";
+			playerMarker === playerOne.myMarker
+				? (winEvent.innerText = "Player 1 wins")
+				: (winEvent.innerText = "Player 2 wins");
+			document.querySelector(".selection-text").innerText = "";
+		} else if (!board.includes("")) {
+			winEvent.style.visibility = "visible";
+			winEvent.innerText = "It's a draw!";
+			document.querySelector(".selection-text").innerText = "";
+			playAgain();
 		}
+	};
+
+	const playAgain = () => {
+		const playAgain = document.createElement("button");
+		playAgain.className = "playAgain";
+		playAgain.innerText = "Play Again?";
+		document.querySelector(".winEvent").appendChild(playAgain);
+		playAgain.addEventListener("click", () => {
+			document.querySelector(".winEvent").style.visibility = "hidden";
+			console.log(board);
+			document.querySelector(".overlay").style.visibility = "visible";
+		});
 	};
 
 	handleChoice();
